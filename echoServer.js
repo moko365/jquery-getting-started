@@ -12,6 +12,7 @@ http.createServer(function (req, res) {
     };
 
     var sendJSON = function() {
+        res.setHeader('Access-Control-Allow-Origin', "*");
         res.writeHead(200, {'Content-Type': 'application/json'});
         res.write(JSON.stringify(data));
         res.end();
