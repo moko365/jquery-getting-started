@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">
+        <div>
+            <input type="text" name="msg" placeholder="enter message here">
+            <input type="button" value="send" class="btn">
+        </div>
+        <div id="msg"></div>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script>
+    $(function() {
+        var url = 'http://hank.local:3333/api/echo';
+
+        var loadData = function() {
+            $.get(url, function(resp) {
+                $('#msg').html(resp.msgs.join(', '));
+            });
+        }
+
+        $('.btn').on('click', function() {
+            $.post(url, {
+                msg: $('input[name="msg"]').val()
+            }, function(resp) {
+                loadData();
+            });
+        });
+
+        loadData();
+    });
+    </script>
+</body>
+</html>
