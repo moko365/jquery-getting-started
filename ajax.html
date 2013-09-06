@@ -7,7 +7,7 @@
 <body>
     <div id="container">
         <div>
-            <input type="text" name="msg" placeholder="enter message here">
+            <input type="text" name="msg" placeholder="please enter message">
             <input type="button" value="send" class="btn">
         </div>
         <div id="msg"></div>
@@ -15,10 +15,11 @@
 
     <script src="js/jquery.min.js"></script>
     <script>
-    $(function() {
-        var url = 'http://hank.local:3333/api/echo';
+    var url = "http://hank.local:3333/api/echo";
 
-        var loadData = function() {
+    $(function() {
+
+        var getData = function() {
             $.get(url, function(resp) {
                 $('#msg').html(resp.msgs.join(', '));
             });
@@ -28,11 +29,11 @@
             $.post(url, {
                 msg: $('input[name="msg"]').val()
             }, function(resp) {
-                loadData();
+                getData();
             });
         });
 
-        loadData();
+        getData();
     });
     </script>
 </body>
